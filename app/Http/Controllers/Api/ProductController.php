@@ -28,7 +28,8 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        
+        $data = $request->all();
+        Product::create($data);
     }
 
     /**
@@ -63,6 +64,10 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = Product::findOrFail($id);
+
+        if (Product::delete($product)) {
+            return response()->json(['msg' => 'data deleted'], 201);
+        }
     }
 }
