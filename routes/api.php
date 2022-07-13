@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArtigoController;
+use App\Http\Controllers\Api\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,8 +23,21 @@ Route::get('/ok', function () {
     ];
 });
 
+// Route::namespace('Api')->group(function () {     
+    Route::controller(ProductController::class)
+        ->prefix('v1')
+        ->group(function () {
+            Route::get('/see', 'index');
+    });
+// });
+
+// Route::get('/see', [ProductController::class, 'index']);
 
 Route::apiResource('artigos', ArtigoController::class);
+
+Route::apiResource('produtos', ProductController::class);
+
+
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
