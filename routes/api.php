@@ -15,6 +15,13 @@ use App\Http\Controllers\ArtigoController;
 |
 */
 
+Route::get('/ok', function () {
+    return [
+        'status' => true,
+        'code' => 201
+    ];
+});
+
 
 Route::apiResource('artigos', ArtigoController::class);
 
